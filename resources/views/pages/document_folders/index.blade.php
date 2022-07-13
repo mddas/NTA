@@ -7,6 +7,7 @@
             <h3 class="card-label">Document Folders
             <span class="d-block text-muted pt-2 font-size-sm">List of Document Folders</span></h3>
         </div>
+        @can('post')
         <div class="card-toolbar">
             <!--begin::Button-->
             <a href="{{route('document_folders.create')}}" class="btn btn-primary font-weight-bolder">
@@ -23,6 +24,7 @@
             </span>New Record</a>
             <!--end::Button-->
         </div>
+        @endcan
     </div>
     <div class="card-body">
         <div class="mb-7">
@@ -56,8 +58,12 @@
                     <td>{{$documentFolder->name}}</td>
                     <td>
                         <a href="{{route('documents.list',$documentFolder->id)}}" class="btn btn-info btn-sm mr-2" target="_blank"><i class="fa fa-file-alt icon-sm"></i>Go To Documents</a>
-                        <a href="{{route('document_folders.edit',$documentFolder->id)}}" class="btn btn-success btn-sm mr-2"><i class="fa fa-pen-alt icon-sm"></i>Edit</a>
-                        <a href="{{route('document_folders.delete',$documentFolder->id)}}" class="btn btn-danger btn-sm mr-2" onclick="return confirm('Are you sure want to delete this folder?')"><i class="fa fa-trash-alt icon-sm"></i>Delete</a>
+                        @can('edit')
+                          <a href="{{route('document_folders.edit',$documentFolder->id)}}" class="btn btn-success btn-sm mr-2"><i class="fa fa-pen-alt icon-sm"></i>Edit</a>
+                        @endcan
+                        @can('delete')
+                          <a href="{{route('document_folders.delete',$documentFolder->id)}}" class="btn btn-danger btn-sm mr-2" onclick="return confirm('Are you sure want to delete this folder?')"><i class="fa fa-trash-alt icon-sm"></i>Delete</a>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

@@ -2,8 +2,8 @@
 
 @section('home_content')
    <div class="home_content">
-       <div class="left" id="text"><font color="green"><h2>ROLE</h2></font></div>
-       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button></div>
+       <div class="left" id="text"><h2>ROLE</h2></div>
+       <div class="left" id="add">@can('create')<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button>@endcan</div>
     <div class="show">     
       </div>
   <table class="table table-striped"><!--table table-dark table-striped--->
@@ -26,9 +26,13 @@
       @endforeach
       </td>
       <td>
+        @can('edit')
         <a href="roleedit/?id={{$d['id']}}"><button type="button" class="btn btn-danger">Edit</button></a>
+        @endcan
         <!----roledelete/?id={{$d['id']}}--->
+        @can('delete')
         <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $d["id"]}},"/roledelete")'>Delete</button></a>
+        @endcan
       </td>
     </tr>
   @endforeach
@@ -36,7 +40,7 @@
   </tbody>
 </table>
 <!---------modal------------>
-
+@can('create')
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -47,7 +51,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="insertrole" method="get">
+        <form action="insertrole" method="post">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Role Name</label>
@@ -62,7 +66,7 @@
              </label>
            </div>
          @endforeach
-         <input type="text" name="update" value="0">
+         <input type="hidden" name="update" value="0">
 
           <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -75,7 +79,7 @@
     </div>
   </div>
       </div>
-
+@endcan
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

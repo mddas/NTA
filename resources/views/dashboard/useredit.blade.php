@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Role Permisson </title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,13 +32,13 @@
       <!---One of three columns--->
     </div>
     <div class="col-7">
-    <form action="insertuser" method="get">
+    <form action="insertuser" method="POST">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Name</label>
-            <input type="text" class="form-control" id="recipient-name" name="Name" value="{{$userdata['name']}}">
+            <input type="text" class="form-control" id="recipient-name" name="name" value="{{$userdata['username']}}">
           </div>
-          @can('role')
+          
           <div class="form-group">
             <label for="message-text" class="col-form-label">Role</label>       
             <select class="form-select" aria-label="Default select example" name="role">
@@ -51,11 +51,12 @@
                 @endforeach
              </select>
            </div>
-           @endcan
+        <!--
           <div class="form-group">
             <label for="message-text" class="col-form-label">Email</label>
             <input type="email" class="form-control" id="message-text" name="email" value="{{$userdata['email']}}">
           </div>
+        --->
           <div class="form-group">
             <label for="message-text" class="col-form-label">Password</label>
             <input type="password" class="form-control" id="message-text" name="password">

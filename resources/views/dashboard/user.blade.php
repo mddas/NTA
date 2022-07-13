@@ -1,16 +1,11 @@
-@extends('layout.master')
-@section('content')
-  <script>
-    // alert("lol")
-    </script>
-@endsection
-
-  <div class="home_content">
+@extends('layouts.master')
+@section('home_content')
+   <div class="home_content">
        <div class="left" id="text"><font color="green"><h2>USER DASHBOARD </h2></font></div>
        <div class="left" id="add">
-       <!---can('create')  -->
+    @can('create')
        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="New User Register"><img src="images/Add.png" height="80px" width="80px"></button>
-       <!---endcan ---> 
+    @endcan
       </div>
        <div class="show">     
       </div>
@@ -30,27 +25,24 @@
       <th scope="row">{{$d['id']}}</th>
       <td>{{$d['username']}}</td>
       <td>
-        <!----
-        foreach($d->getRoleNames() as $rol)
-        <button type="button" class="btn btn-info btn-sm">$rol</button>
-      endforeach
-      --->
+        @foreach($d->getRoleNames() as $rol)
+        <button type="button" class="btn btn-info btn-sm">{{$rol}}</button>
+      @endforeach
       </td>
       <td>
-        <!--
-      foreach($d->getAllPermissions() as $per)
-        <button type="button" class="btn btn-info btn-sm">$per['name']</button>
-      endforeach
-      --->
+      @foreach($d->getAllPermissions() as $per)
+        <button type="button" class="btn btn-info btn-sm">{{$per['name']}}</button>
+      @endforeach
       </td>
       <td>
-        <!---can('edit')----/useredit?id=$d['id']-->
-        <a href="#"><button type="button" class="btn btn-danger" >Edit</button>
-        <!---endcan---->
-        <!-----can('delete')--->
+       @can("edit")
+        <a href="/useredit?id={{$d['id']}}"><button type="button" class="btn btn-danger" >Edit</button>
+       @endcan
+   
         <!----/userdelete?id={{$d['id']}}---->
-        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $d["id"]}},"{{route("userdelete")}}")'>Delete</button></a>
-        <!----endcan--->
+        @can("delete")
+        <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{ $d["id"]}},"/userdelete")'>Delete</button></a>
+        @endcan
       </td>
     </tr>
   @endforeach
@@ -58,7 +50,7 @@
   </tbody>
 </table>
 <!---------modal------------>
-
+@can('create')
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -69,7 +61,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('createuser')}}" method="get">
+        <form action="insertuser" method="POST">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Name</label>
@@ -78,15 +70,15 @@
           <div class="form-group">
             <label for="message-text" class="col-form-label">Role</label>       
             <select class="form-select" aria-label="Default select example" name="role">
-                 <!---foreach($roledata as $r)--->
-                   <option value="user">USER</option>
-                 <!---endforeach---->
+                 @foreach($roledata as $r)
+                   <option value="{{$r['id']}}">{{$r['name']}}</option>
+                 @endforeach
              </select>
            </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="message-text" class="col-form-label">Email</label>
             <input type="email" class="form-control" id="message-text" name="email">
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="message-text" class="col-form-label">Password</label>
             <input type="password" class="form-control" id="message-text" name="password">
@@ -102,6 +94,7 @@
     </div>
   </div>
       </div>
+@endcan
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -118,3 +111,5 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 })
 </script>
 <!---------modal close----->
+@endsection
+

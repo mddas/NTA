@@ -7,6 +7,7 @@
             <h3 class="card-label">Fiscal Year
             <span class="d-block text-muted pt-2 font-size-sm">list of fiscal year registered in the system</span></h3>
         </div>
+        @can('create')
         <div class="card-toolbar">
             <!--begin::Button-->
             <a href="{{route('fiscal_years.create')}}" class="btn btn-primary font-weight-bolder">
@@ -23,6 +24,7 @@
             </span>New Record</a>
             <!--end::Button-->
         </div>
+      @endcan
     </div>
     <div class="card-body">
         <!--begin: Datatable-->
@@ -44,7 +46,9 @@
                     <td>{{$fiscalYear->start_date->format('Y-m-d')}}</td>
                     <td>{{$fiscalYear->end_date->format('Y-m-d')}}</td>
                     <td>
+                        @can('edit')
                         <a href="{{route('fiscal_years.edit',$fiscalYear->id)}}" class="btn btn-success btn-sm mr-2"><i class="fa fa-pen-alt icon-sm"></i>Edit</a>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

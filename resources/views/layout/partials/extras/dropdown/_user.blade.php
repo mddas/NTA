@@ -26,28 +26,25 @@
     </div>
 @endif
 
-
-
 {{-- Nav --}}
 <div class="navi navi-spacer-x-0 pt-5">
-    
-      {{-- Item --}}
-    <a href="{{route('admin')}}" class="navi-item px-8">
+    {{-- Item --}}
+    <a href="/admin" class="navi-item px-8">
         <div class="navi-link">
             <div class="navi-icon mr-2">
-                <i class="flaticon2-hourglass text-primary"></i>
+                <i class="flaticon2-calendar-3 text-success"></i>
             </div>
             <div class="navi-text">
                 <div class="font-weight-bold">
                     Dashboard
                 </div>
                 <div class="text-muted">
-                    Manage user privileges
+                    create privileges,users,check activity log and view message
+                    <span class="label label-light-danger label-inline font-weight-bold">update</span>
                 </div>
             </div>
         </div>
     </a>
-
     {{-- Item --}}
     <a href="#" class="navi-item px-8">
         <div class="navi-link">

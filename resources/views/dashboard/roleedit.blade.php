@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Role Permisson </title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
     </div>
     <div class="col-7">
  
-        <form action="/insertrole" method="get" class="text">
+        <form action="/insertrole" method="post" class="text">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">RoleName</label>

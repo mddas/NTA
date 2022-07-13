@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PermissonController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,8 +28,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('documents','DocumentsController');
     Route::resource('fiscal_years','FiscalYearController');
 
-    Route::get('user/','AdminController@user')->name('user');
-    Route::get('admin/','AdminController@user')->name('admin');
-    Route::get('admin/create-user','AdminController@createUser')->name('createuser');
-    Route::get('admin/delete-user','AdminController@userdelete')->name('userdelete');
+    //User
+Route::get('admin',[UserController::class,'dashboard'])->name('dashboard');
+Route::get('user',[UserController::class,'show'])->name('user');
+Route::post('insertuser',[UserController::class,'Insert'])->name('insertuser');
+Route::post('useredit',[UserController::class,'Edit'])->name('useredit');
+Route::get('userdelete',[UserController::class,'Delete'])->name('userdelete');
+Route::get('useredit',[UserController::class,'UserEdit'])->name('useredit');
+//Role
+Route::get('role',[RoleController::class,'show']);
+Route::POST('roleedit',[RoleController::class,'edit']);
+Route::post('insertrole',[RoleController::class,'Insert']);
+Route::get('roledelete',[RoleController::class,'Delete']);
+//Peermisson
+Route::get('permisson',[PermissonController::class,'show']);
+Route::post('insertpermisson',[PermissonController::class,'Insert']);
+Route::POST('permissonedit',[PermissonController::class,'Edit']);
+Route::get('permissondelete',[PermissonController::class,'Delete']);
+
+
 });

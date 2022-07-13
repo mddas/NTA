@@ -4,7 +4,7 @@
 @section('home_content')
    <div class="home_content">
        <div class="left" id="text"><font color="green"><h2>PERMISSON</h2></font></div>
-       <div class="left" id="add">@can('create')<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button>@endcan</div>
+       <div class="left" id="add"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><img src="images/Add.png" height="80px" width="80px"></button></div>
     <div class="show">     
       </div>
   <table class="table table-striped"><!--table table-dark table-striped--->
@@ -24,8 +24,8 @@
         @can('edit')
         <a href="/permissonedit?id={{$d['id']}}&name={{$d['name']}}"><button id="{{$d['id']}}" type="button" class="btn btn-danger">Edit</button></a>
         @endcan
-        @can('delete')
         <!---/permissondelete?id={{$d['id']}}---->
+        @can('delete')
         <a href="#"><button type="button" class="btn btn-danger" onclick='deLete({{$d["id"]}},"/permissondelete")'>Delete</button></a>
         @endcan
       </td>
@@ -45,7 +45,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="insertpermisson" method="get">
+        <form action="insertpermisson" method="post">
           @csrf
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Permisson Name</label>

@@ -7,6 +7,7 @@
             <h3 class="card-label">Issued Certificate 
             <span class="d-block text-muted pt-2 font-size-sm">list of issued certificates</span></h3>
         </div>
+        @can('create')
         <div class="card-toolbar">
             <!--begin::Button-->
             <a href="{{route('documents.create')}}" class="btn btn-primary font-weight-bolder">
@@ -23,6 +24,7 @@
             </span>New Record</a>
             <!--end::Button-->
         </div>
+       @endcan
     </div>
     <div class="card-body">
         <!--begin: Datatable-->
@@ -53,6 +55,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @can('edit')
                         <a href="{{route('documents.edit',$document->id)}}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
                             <span class="svg-icon svg-icon-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -64,6 +67,8 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
+                        @can('delete')
                         <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
                             <span class="svg-icon svg-icon-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -75,6 +80,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach
