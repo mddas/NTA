@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home1/demoradiantnepal/nta.noble-school.com/
+    - export DEPLOYPATH=/home2/noblesch/nta.noble-school.com/
     - /bin/cp -r * $DEPLOYPATH
